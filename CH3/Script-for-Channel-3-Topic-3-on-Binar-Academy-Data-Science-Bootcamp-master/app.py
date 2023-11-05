@@ -9,15 +9,17 @@ from flask import request
 from flasgger import Swagger, LazyString, LazyJSONEncoder
 from flasgger import swag_from
 
+# template swagger
 app.json_encoder = LazyJSONEncoder
-swagger_template = dict(
-info = {
-    'title': LazyString(lambda: 'API Documentation for Data Processing and Modeling'),
-    'version': LazyString(lambda: '1.0.0'),
-    'description': LazyString(lambda: 'Dokumentasi API untuk Data Processing dan Modeling'),
-    },
-    host = LazyString(lambda: request.host)
-)
+
+swagger_template = {
+    'info' : {
+        'title': 'API Documentation for Data Processing and Modeling',
+        'version': '1.0.0',
+        'description': 'Dokumentasi API untuk Data Processing dan Modeling',
+        },
+    'host' : '127.0.0.1:5000'
+}
 swagger_config = {
     "headers": [],
     "specs": [
@@ -33,17 +35,23 @@ swagger_config = {
 swagger = Swagger(app, template=swagger_template,             
                   config=swagger_config)
 
-@swag_from("docs/hello_world.yml", methods=['GET'])
-@app.route('/', methods=['GET'])
+# end template swagger
+
 def hello_world():
     json_response = {
-        'status_code': 200,
+        # 'status_code': 200,
         'description': "Menyapa Hello World",
         'data': "Hello World",
+        'is_condition_met' : True
     }
+    
+    if json_response['is_condition_met']:
+        status_code = 200  # Ubah status code menjadi 200 jika kondisi terpenuhi
+    else:
+        status_code = 404  # Ubah status code menjadi 404 jika kondisi tidak terpenuhi
 
     response_data = jsonify(json_response)
-    return response_data
+    return response_data, status_code  # Mengembalikan respons dengan status code yang telah ditentukan
 
 @swag_from("docs/text.yml", methods=['GET'])
 @app.route('/text', methods=['GET'])
@@ -51,7 +59,7 @@ def text():
     json_response = {
         'status_code': 200,
         'description': "Original Teks",
-        'data': "Halo, apa kabar semua?",
+        'data': "Halo, apa kabar semua?", 
     }
 
     response_data = jsonify(json_response)
