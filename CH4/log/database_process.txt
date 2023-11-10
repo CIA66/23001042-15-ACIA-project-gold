@@ -1,0 +1,2 @@
+2023-11-10 22:02:40 - Create table users complete!
+2023-11-10 22:02:40 - Create table hobbies complete!

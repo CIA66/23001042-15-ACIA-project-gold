@@ -5,6 +5,7 @@ print("Opened database successfully")
 print()
 
 conn.execute("UPDATE users SET email = 'bintang1@binar.com' where username = 'bintang';")
+conn.execute("UPDATE users SET alamat = 'jaktim' where alamat = 'jakarta timur';")
 conn.commit()
 
 
