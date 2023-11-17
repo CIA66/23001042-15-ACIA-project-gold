@@ -108,7 +108,7 @@ def text_processing_file():
     # Lakukan cleansing pada teks
     cleaned_text = []
     for text in texts:
-        cleaned_text.append(re.sub(r'[^a-zA-Z0-9]', ' ', text))
+        cleaned_text.append(re.sub(r'[^a-zA-Z0-9]', ' ', text))   # NANTI DI SINI DITAMBAHIN
 
     json_response = {
         'status_code': 200,
