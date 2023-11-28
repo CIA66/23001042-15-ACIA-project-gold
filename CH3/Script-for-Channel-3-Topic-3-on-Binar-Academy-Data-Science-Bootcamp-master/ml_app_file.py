@@ -14,7 +14,7 @@ def data_processing(file_obj):
     # Lakukan cleansing pada teks
     cleaned_text = []
     for text in texts:
-        cleaned_text.append(re.sub(r'https\S+|[^a-zA-Z0-9]', '', text))
+        cleaned_text.append(re.sub(r'https\S+|[^a-zA-Z0-9]', ' ', text))
 
     return cleaned_text
 
