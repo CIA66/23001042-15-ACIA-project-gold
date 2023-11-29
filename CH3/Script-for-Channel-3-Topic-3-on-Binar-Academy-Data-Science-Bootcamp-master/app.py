@@ -103,12 +103,13 @@ def text_processing_file():
     df = pd.read_csv(file)
 
     # Ambil teks yang akan diproses dalam format list
-    texts = df.text.to_list()
+    # texts = df.text.to_list()
+    texts = df['Tweet'].to_list()
 
     # Lakukan cleansing pada teks
     cleaned_text = []
     for text in texts:
-        cleaned_text.append(re.sub(r'[^a-zA-Z0-9]', ' ', text))   # NANTI DI SINI DITAMBAHIN
+        cleaned_text.append(re.sub(r'https\S+|[^a-zA-Z0-9]', '', str(text)))   # NANTI DI SINI DITAMBAHIN
 
     json_response = {
         'status_code': 200,
@@ -120,5 +121,5 @@ def text_processing_file():
     return response_data
 
 if __name__ == '__main__':
-   app.run()
+   app.run(debug=True)
 
