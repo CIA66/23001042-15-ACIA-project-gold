@@ -100,11 +100,12 @@ def text_processing_file():
     file = request.files.getlist('file')[0]
 
     # Import file csv ke Pandas
-    df = pd.read_csv(file)
+    df = pd.read_csv(file, encoding="latin-1")
 
     # Ambil teks yang akan diproses dalam format list
     # texts = df.text.to_list()
     texts = df['Tweet'].to_list()
+    # texts = df['Text_tweet'].to_list()
 
     # Lakukan cleansing pada teks
     cleaned_text = []
@@ -121,4 +122,4 @@ def text_processing_file():
     return response_data
 
 if __name__ == '__main__':
-   app.run(debug=True)
+   app.run()
